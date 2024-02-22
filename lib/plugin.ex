@@ -1,6 +1,6 @@
 defmodule Pilot.Plugin do
   @moduledoc """
-  Behavior for plugin implementations
+  Behaviour for plugin implementations
   """
 
   alias Nostrum.Struct.Interaction
