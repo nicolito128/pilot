@@ -1,9 +1,13 @@
 defmodule Pilot.Plugins.Commands.Ping do
+  @moduledoc """
+  Ping application command process.
+  """
   alias Nostrum.Api
   alias Pilot.Plugin
 
   @behaviour Plugin
 
+  @spec spec() :: map()
   @impl Plugin
   def spec() do
     %{
@@ -12,6 +16,7 @@ defmodule Pilot.Plugins.Commands.Ping do
     }
   end
 
+  @spec handle(Nostrum.Struct.Interaction.t()) :: any()
   @impl Plugin
   def handle(interaction) do
     Api.create_interaction_response(interaction, %{

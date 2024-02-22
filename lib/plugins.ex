@@ -1,4 +1,7 @@
 defmodule Pilot.Plugins do
+  @moduledoc """
+  Plugins is responsible for handling the loading and fetching of the various bot processes.
+  """
   alias Nostrum.Api
   alias Pilot.Plugins.{
     Commands,
@@ -14,15 +17,18 @@ defmodule Pilot.Plugins do
 
   @plugin_names for { name, _ } <- @plugins, do: name
 
+  @spec load_plugins() :: :ok
   def load_plugins() do
-    commands = get_command_specs()
-    write_application_commands(commands)
+    get_command_specs() |> write_application_commands
+
+    :ok
   end
 
   def get_command_specs() do
     @plugin_specs |> Enum.filter(fn spec -> spec.kind == :command end)
   end
 
+  @spec get_plugin_by_name(String.t(), atom()) :: any()
   def get_plugin_by_name(name, kind \\ :command) do
     { plugin, kind: ^kind } = Map.get(@plugins, name)
     plugin

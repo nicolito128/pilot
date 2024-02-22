@@ -1,9 +1,10 @@
 defmodule Pilot.Consumer do
+  # See https://hexdocs.pm/nostrum/0.8.0/Nostrum.Consumer.html
+  # for more information about Consumer behaviour.
   use Nostrum.Consumer
 
   alias Pilot.Plugins
 
-  @spec handle_event(Nostrum.Consumer.event()) :: any()
   def handle_event({:READY, _data, _ws_state} = event) do
     Plugins.load_plugins()
 
